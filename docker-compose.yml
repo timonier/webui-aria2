@@ -1,0 +1,14 @@
+aria2:
+  image: mauchede/aria2:1.18.8
+  command: --log=- --enable-rpc --rpc-listen-all=true --rpc-secret=ThisTokenIsNotSoSecretChangeIt
+
+webui-aria2:
+  image: mauchede/webui-aria2
+  links:
+    - aria2
+  environment:
+    - "RPC_HOST=http://aria2:6800"
+    - "RPC_SECRET=ThisTokenIsNotSoSecretChangeIt"
+  ports:
+    - 80:80
+    - 6800:6800

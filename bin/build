@@ -1,0 +1,9 @@
+#!/bin/bash
+set -ex
+cd "`dirname "$0"`/../src"
+
+[[ -z $IMAGE ]] && IMAGE="mauchede/webui-aria2"
+[[ -z $TAG ]] && TAG="latest"
+
+docker rmi $IMAGE:$TAG || :
+docker build -t $IMAGE:$TAG .
