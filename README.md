@@ -16,7 +16,7 @@ docker run -p 80:80 mauchede/webui-aria2
 # Go to the URL "localhost"
 ```
 
-`mauchede/webui-aria2` [mauchede/aria2](https://github.com/mauchede/aria2). An example of usage is provided with the `docker-compose`:
+This image can be used with [mauchede/aria2](https://github.com/mauchede/aria2). An example of usage is provided with `docker-compose`:
 
 ```
 # Start the project
