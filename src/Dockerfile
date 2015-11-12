@@ -1,7 +1,9 @@
 FROM alpine:3.1
 MAINTAINER Morgan Auchede <morgan.auchede@gmail.com>
 
-ENV WEBUI_ARIA2_VERSION=e48a7a79
+ENV \
+    NGINX_VERSION=1.6.2-r1 \
+    WEBUI_ARIA2_VERSION=e48a7a79
 
 RUN set -x \
     && BUILD_DEPS="ca-certificates git" \
