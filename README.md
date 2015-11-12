@@ -25,6 +25,8 @@ docker-compose up -d
 # Go to the URL "localhost"
 ```
 
+__Note__: Don't forget to change the token used between `aria2` and `webui-aria2`. You can use `bin/generate-secret`.
+
 ### Contributing
 
 1. Fork it.
