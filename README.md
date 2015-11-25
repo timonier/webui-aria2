@@ -35,6 +35,8 @@ __Note__: Don't forget to change the token used between `aria2` and `webui-aria2
 4. Push to the branch: `git push origin my-new-feature`.
 5. Submit a pull request.
 
+__Note__: Use the script `bin/build` to test your modifications locally.
+
 ### Links
 
 * [docker-compose](https://docs.docker.com/compose/)

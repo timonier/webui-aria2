@@ -16,8 +16,6 @@ RUN set -x \
     && apk del $BUILD_DEPS \
     && rm -rf /var/cache/apk/* /var/www/webui-aria2/.git
 
-COPY nginx /etc/nginx
-COPY webui-aria2 /var/www/webui-aria2
-COPY entrypoint.sh /entrypoint.sh
+COPY ./root /
 
 ENTRYPOINT [ "/entrypoint.sh" ]
