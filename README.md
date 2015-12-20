@@ -1,31 +1,34 @@
 ### Installation
 
-Pull the image `mauchede/webui-aria2`:
+Pull the image `timonier/webui-aria2`:
 
 ```bash
 # Get the latest image
-docker pull mauchede/webui-aria2
+docker pull timonier/webui-aria2
 ```
 
 ### Usage
 
-Run the image `mauchede/webui-aria2`:
+Run the image `timonier/webui-aria2`:
 
 ```bash
-docker run -p 80:80 mauchede/webui-aria2
+docker run -p 80:80 timonier/webui-aria2
 # Go to the URL "localhost"
 ```
 
-This image can be used with [mauchede/aria2](https://github.com/mauchede/aria2). An example of usage is provided with `docker-compose`:
+This image can be used with [timonier/aria2](https://github.com/timonier/aria2). An example of usage is provided with `docker-compose`:
 
-```
+```bash
+# Copy the default configuration
+cp docker-compose.yml.dist docker-compose.yml
+
 # Start the project
 docker-compose up -d
 
 # Go to the URL "localhost"
 ```
 
-__Note__: Don't forget to change the token used between `aria2` and `webui-aria2`. You can use `bin/generate-secret`.
+__Note__: Don't forget to change the token used between `aria2` and `webui-aria2`. Use `bin/generate-secret` if you want to generate a strong token.
 
 ### Contributing
 
@@ -40,7 +43,6 @@ __Note__: Use the script `bin/build` to test your modifications locally.
 ### Links
 
 * [docker-compose](https://docs.docker.com/compose/)
-* [image "mauchede/aria2"](https://hub.docker.com/r/mauchede/aria2/)
-* [image "mauchede/webui-aria2"](https://hub.docker.com/r/mauchede/webui-aria2/)
-* [mauchede/aria2](https://hub.docker.com/r/mauchede/aria2/)
-* [ziahamza/webui-aria2](https://github.com/ziahamza/webui-aria2)
+* [image "timonier/aria2"](https://hub.docker.com/r/timonier/aria2/)
+* [image "timonier/webui-aria2"](https://hub.docker.com/r/timonier/webui-aria2/)
+* [webui-aria2](https://github.com/ziahamza/webui-aria2)

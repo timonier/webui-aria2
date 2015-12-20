@@ -2,7 +2,7 @@
 set -ex
 cd "`dirname "$0"`/../src"
 
-IMAGE=${IMAGE:-mauchede/webui-aria2}
+IMAGE=${IMAGE:-timonier/webui-aria2}
 TAG=${TAG:-latest}
 
 docker rmi $IMAGE:$TAG || :

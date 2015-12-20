@@ -1,13 +1,13 @@
 aria2:
-  image: mauchede/aria2:1.18.8
+  image: timonier/aria2:1.18.8
   command: --enable-rpc --log=- --log-level=warn --quiet --rpc-listen-all=true --rpc-secret=ThisTokenIsNotSoSecretChangeIt
   ports:
-    - 6800:6800
+    - "6800:6800"
 
 webui-aria2:
-  image: mauchede/webui-aria2
+  image: timonier/webui-aria2
   environment:
     - "RPC_HOST=127.0.0.1"
     - "RPC_SECRET=ThisTokenIsNotSoSecretChangeIt"
   ports:
-    - 80:80
+    - "80:80"
