@@ -42,6 +42,8 @@ __Note__: Use the script `bin/build` to test your modifications locally.
 
 ### Links
 
+* [command "docker pull"](https://docs.docker.com/reference/commandline/pull/)
+* [command "docker run"](https://docs.docker.com/reference/run/)
 * [docker-compose](https://docs.docker.com/compose/)
 * [image "timonier/aria2"](https://hub.docker.com/r/timonier/aria2/)
 * [image "timonier/webui-aria2"](https://hub.docker.com/r/timonier/webui-aria2/)
