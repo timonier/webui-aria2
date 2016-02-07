@@ -1,9 +1,4 @@
 #!/bin/bash
-set -ex
 cd "`dirname "$0"`/../src"
 
-IMAGE=${IMAGE:-timonier/webui-aria2}
-TAG=${TAG:-latest}
-
-docker rmi $IMAGE:$TAG || :
-docker build -t $IMAGE:$TAG .
+docker build -t ${IMAGE:-timonier/webui-aria2}:${TAG:-latest} .

@@ -1,4 +1,4 @@
-### Installation
+# Installation
 
 Pull the image `timonier/webui-aria2`:
 
@@ -7,7 +7,7 @@ Pull the image `timonier/webui-aria2`:
 docker pull timonier/webui-aria2
 ```
 
-### Usage
+# Usage
 
 Run the image `timonier/webui-aria2`:
 
@@ -30,7 +30,7 @@ docker-compose up -d
 
 __Note__: Don't forget to change the token used between `aria2` and `webui-aria2`. Use `bin/generate-secret` if you want to generate a strong token.
 
-### Contributing
+# Contributing
 
 1. Fork it.
 2. Create your branch: `git checkout -b my-new-feature`.
@@ -40,7 +40,7 @@ __Note__: Don't forget to change the token used between `aria2` and `webui-aria2
 
 __Note__: Use the script `bin/build` to test your modifications locally.
 
-### Links
+# Links
 
 * [command "docker pull"](https://docs.docker.com/reference/commandline/pull/)
 * [command "docker run"](https://docs.docker.com/reference/run/)
