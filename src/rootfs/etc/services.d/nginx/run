@@ -1,0 +1,3 @@
+#!/usr/bin/with-contenv /bin/sh
+
+/usr/sbin/nginx
