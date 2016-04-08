@@ -4,7 +4,7 @@
 
 Pull the image `timonier/webui-aria2`:
 
-```bash
+```sh
 # Get the latest image
 docker pull timonier/webui-aria2
 ```
@@ -13,14 +13,14 @@ docker pull timonier/webui-aria2
 
 Run the image `timonier/webui-aria2`:
 
-```bash
+```sh
 docker run -p 80:80 timonier/webui-aria2
 # Go to the URL "localhost"
 ```
 
 This image can be used with [timonier/aria2](https://github.com/timonier/aria2). An example of usage is provided with `docker-compose`:
 
-```bash
+```sh
 # Copy the default configuration
 cp docker-compose.yml.dist docker-compose.yml
 
