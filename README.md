@@ -50,4 +50,5 @@ __Note__: Use the script `bin/build` to test your modifications locally.
 * [image "timonier/aria2"](https://hub.docker.com/r/timonier/aria2/)
 * [image "timonier/webui-aria2"](https://hub.docker.com/r/timonier/webui-aria2/)
 * [s6-overlay](https://github.com/just-containers/s6-overlay)
+* [syslog-stdout](https://github.com/timonier/syslog-stdout)
 * [webui-aria2](https://github.com/ziahamza/webui-aria2)
