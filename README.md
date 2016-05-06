@@ -21,11 +21,18 @@ docker run -p 80:80 timonier/webui-aria2
 This image can be used with [timonier/aria2](https://github.com/timonier/aria2). An example of usage is provided with `docker-compose`:
 
 ```sh
-# Copy the default configuration
-cp docker-compose.yml.dist docker-compose.yml
+# Override docker-compose
+cat > docker-compose.override.yml << "EOF"
+aria2:
+    command: --enable-rpc --log=- --log-level=warn --quiet --rpc-listen-all=true --rpc-secret=$RPC_SECRET
+
+webui-aria2:
+    environment:
+        - "RPC_SECRET=$RPC_SECRET"
+EOF
 
 # Start the project
-docker-compose up -d
+RPC_SECRET="0fd9094d-76ca-4a76-be82-eaf513a1ccd2" docker-compose up -d
 
 # Go to the URL "localhost"
 ```
