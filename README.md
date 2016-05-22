@@ -14,7 +14,11 @@ docker pull timonier/webui-aria2
 Run the image `timonier/webui-aria2`:
 
 ```sh
-docker run -p 80:80 timonier/webui-aria2
+docker run \
+    -i \
+    -t \
+    -p 80:80 \
+    timonier/webui-aria2
 # Go to the URL "localhost"
 ```
 
