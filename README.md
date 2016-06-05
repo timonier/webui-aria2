@@ -27,16 +27,28 @@ This image can be used with [timonier/aria2](https://github.com/timonier/aria2).
 ```sh
 # Override docker-compose
 cat > docker-compose.override.yml << "EOF"
-aria2:
-    command: --enable-rpc --log=- --log-level=warn --quiet --rpc-listen-all=true --rpc-secret=$RPC_SECRET
+version: '2'
 
-webui-aria2:
-    environment:
-        - "RPC_SECRET=$RPC_SECRET"
+services:
+    aria2:
+        command:
+            - --enable-rpc
+            - --log=-
+            - --log-level=warn
+            - --quiet
+            - --rpc-listen-all=true
+            - --rpc-secret=$RPC_SECRET
+
+    webui-aria2:
+        environment:
+            - "RPC_SECRET=$RPC_SECRET"
 EOF
 
+# Prepare the project
+export RPC_SECRET="0fd9094d-76ca-4a76-be82-eaf513a1ccd2"
+
 # Start the project
-RPC_SECRET="0fd9094d-76ca-4a76-be82-eaf513a1ccd2" docker-compose up -d
+docker-compose up -d
 
 # Go to the URL "localhost"
 ```

@@ -16,11 +16,6 @@ RUN set -x \
     && apk add --no-cache --no-progress \
            nginx \
 
-    # Configure nginx
-
-    && mkdir -p /var/tmp/nginx \
-    && chown nginx:nginx /var/tmp/nginx \
-
     # Install s6-overlay
 
     && curl -sL "https://github.com/just-containers/s6-overlay/releases/download/v$S6_OVERLAY_VERSION/s6-overlay-amd64.tar.gz" | tar fxz - -C / \
