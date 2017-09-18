@@ -1,29 +1,37 @@
-version: '2'
+version: '3'
 
 services:
+
     aria2:
-        image: timonier/aria2:1.18.8
         command:
-            - --enable-rpc
-            - --log=-
-            - --log-level=warn
-            - --quiet
-            - --rpc-listen-all=true
-            - --rpc-secret=ThisTokenIsNotSoSecretChangeIt
+            - 'aria2c'
+            - '--dir=/var/lib/seedbox'
+            - '--enable-dht=false'
+            - '--enable-rpc'
+            - '--log=-'
+            - '--log-level=notice'
+            - '--max-concurrent-downloads=10'
+            - '--quiet'
+            - '--rpc-listen-all=true'
+            - '--rpc-save-upload-metadata=false'
+            - '--rpc-secret=${RPC_SECRET}'
+        environment:
+            - 'USER=nobody'
+        image: timonier/aria2:latest
         ports:
-            - 6800:6800
-        user: nobody
+            - '6800:6800'
         volumes:
-            - files:/var/lib/seedbox:rw
+            - 'data:/var/lib/seedbox:rw'
 
     webui-aria2:
-        image: timonier/webui-aria2
         environment:
-            - RPC_HOST=127.0.0.1
-            - RPC_PORT=6800
-            - RPC_SECRET=ThisTokenIsNotSoSecretChangeIt
+            - 'RPC_HOST=127.0.0.1'
+            - 'RPC_PORT=6800'
+            - 'RPC_SECRET=${RPC_SECRET}'
+        image: timonier/webui-aria2:latest
         ports:
-            - 80:80
+            - '80:80'
 
 volumes:
-    files: {}
+
+    data: {}

@@ -1,43 +1,38 @@
-FROM alpine:3.3
-MAINTAINER Morgan Auchede <morgan.auchede@gmail.com>
+FROM nginx:alpine
+
+LABEL \
+    maintainer="Morgan Auchede <morgan.auchede@gmail.com>"
 
 ENV \
-    S6_OVERLAY_VERSION=1.17.1.2 \
-    SYSLOG_STDOUT_VERSION=1.1.1 \
-    WEBUI_ARIA2_VERSION=e48a7a79
+    S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
+    S6_KEEP_ENV=1 \
+    WEBUI_ARIA2_VERSION=latest
 
-RUN set -x \
+RUN set -ex \
 
     # Install packages
 
-    && apk add --no-cache --no-progress --virtual build_deps \
+    && apk add --no-cache --no-progress --virtual BUILD_DEPS \
+           curl \
            git \
 
-    && apk add --no-cache --no-progress \
-           nginx \
+    # Install timonier/dumb-entrypoint
 
-    # Install s6-overlay
-
-    && curl -sL "https://github.com/just-containers/s6-overlay/releases/download/v$S6_OVERLAY_VERSION/s6-overlay-amd64.tar.gz" | tar fxz - -C / \
-
-    # Install syslog-stdout
-
-    && curl -sL "https://github.com/timonier/syslog-stdout/releases/download/v$SYSLOG_STDOUT_VERSION/syslog-stdout.tar.gz" | tar fxz - -C /usr/sbin \
+    && curl --location "https://github.com/timonier/dumb-entrypoint/raw/master/src/s6-overlay/installer" | INSTALL_DIRECTORY="/usr/sbin" sh -s -- install \
+    && curl --location "https://github.com/timonier/dumb-entrypoint/raw/master/src/syslog-stdout/installer" | INSTALL_DIRECTORY="/usr/sbin" sh -s -- install \
 
     # Install webui-aria2
 
     && git clone https://github.com/ziahamza/webui-aria2 /usr/share/webui-aria2 \
-    && git -C /usr/share/webui-aria2 checkout $WEBUI_ARIA2_VERSION \
 
     # Clean
 
     && apk del --no-progress \
-           build_deps \
+           BUILD_DEPS \
 
-    && rm -rf \
+    && rm -f -r \
            /tmp/* \
-           /usr/share/webui-aria2/.git \
-           /var/www
+           /usr/share/webui-aria2/.git
 
 COPY ./rootfs /
 
