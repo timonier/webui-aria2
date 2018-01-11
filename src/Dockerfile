@@ -6,7 +6,8 @@ LABEL \
 ENV \
     S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
     S6_KEEP_ENV=1 \
-    WEBUI_ARIA2_VERSION=latest
+    WEBUI_ARIA2_VERSION=latest \
+    S6_READ_ONLY_ROOT=1
 
 RUN set -ex \
 \
@@ -21,17 +22,17 @@ RUN set -ex \
     && curl --location "https://github.com/timonier/dumb-entrypoint/raw/master/src/s6-overlay/installer" | INSTALL_DIRECTORY="/usr/sbin" sh -s -- install \
     && curl --location "https://github.com/timonier/dumb-entrypoint/raw/master/src/syslog-stdout/installer" | INSTALL_DIRECTORY="/usr/sbin" sh -s -- install \
 \
-    # Install webui-aria2
+    # Install ziahamza/webui-aria2
 \
-    && git clone https://github.com/ziahamza/webui-aria2 /usr/share/webui-aria2 \
+    && git clone https://github.com/ziahamza/webui-aria2 /opt/webui-aria2 \
 \
     # Clean
 \
     && apk del --no-progress \
            BUILD_DEPS \
     && rm -f -r \
-           /tmp/* \
-           /usr/share/webui-aria2/.git
+           /opt/webui-aria2/.git \
+           /tmp/*
 
 COPY ./rootfs /
 

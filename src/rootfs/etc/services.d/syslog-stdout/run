@@ -1,4 +1,4 @@
 #!/bin/sh
 set -e
 
-syslog-stdout
+exec s6-setuidgid root syslog-stdout

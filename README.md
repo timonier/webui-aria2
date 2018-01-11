@@ -2,7 +2,7 @@
 
 Best and hottest interface to interact with aria2
 
-## Usage
+## Usage
 
 Run the image `timonier/webui-aria2`:
 

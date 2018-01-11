@@ -1,4 +1,4 @@
-version: '3'
+version: '2.3'
 
 services:
 
@@ -18,12 +18,16 @@ services:
         environment:
             - 'USER=nobody'
         image: timonier/aria2:latest
+        init: true
         ports:
             - '6800:6800'
         volumes:
             - 'data:/var/lib/seedbox:rw'
 
     webui-aria2:
+        build:
+            context: ./src
+            dockerfile: Dockerfile
         environment:
             - 'RPC_HOST=127.0.0.1'
             - 'RPC_PORT=6800'

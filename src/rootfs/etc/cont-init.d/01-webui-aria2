@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
 
-sed -i "s@%RPC_HOST%@${RPC_HOST:-127.0.0.1}@g" /usr/share/webui-aria2/configuration.js
-sed -i "s@%RPC_PORT%@${RPC_PORT:-6800}@g" /usr/share/webui-aria2/configuration.js
-sed -i "s@%RPC_SECRET%@${RPC_SECRET:-}@g" /usr/share/webui-aria2/configuration.js
+sed --in-place "s@%RPC_HOST%@${RPC_HOST:-127.0.0.1}@g" /opt/webui-aria2/configuration.js
+sed --in-place "s@%RPC_PORT%@${RPC_PORT:-6800}@g" /opt/webui-aria2/configuration.js
+sed --in-place "s@%RPC_SECRET%@${RPC_SECRET:-}@g" /opt/webui-aria2/configuration.js
