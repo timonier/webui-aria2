@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
 
-s6-svwait /var/run/s6/services/syslog-stdout
+s6-svwait /var/run/s6/services/syslogd
 
 exec s6-setuidgid root nginx -g 'daemon off;'
