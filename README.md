@@ -39,6 +39,8 @@ __Note__: Don't forget to change the token used between `aria2` and `webui-aria2
 
 __Note__: Use the script `bin/build` to test your modifications locally.
 
+If you like / use this project, please let me known by adding a [★](https://help.github.com/articles/about-stars/) on the [GitHub repository](https://github.com/timonier/webui-aria2).
+
 ## Links
 
 * [command "docker run"](https://docs.docker.com/reference/run/)

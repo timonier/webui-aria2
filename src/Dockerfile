@@ -1,25 +1,17 @@
-FROM nginx:stable-alpine
+FROM timonier/nginx:latest
 
 LABEL \
     maintainer="Morgan Auchede <morgan.auchede@gmail.com>"
 
 ENV \
-    S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
-    S6_KEEP_ENV=1 \
-    WEBUI_ARIA2_VERSION=latest \
-    S6_READ_ONLY_ROOT=1
+    WEBUI_ARIA2_VERSION=latest
 
 RUN set -ex \
 \
     # Install packages
 \
     && apk add --no-cache --no-progress --virtual BUILD_DEPS \
-           curl \
            git \
-\
-    # Install timonier/dumb-entrypoint
-\
-    && curl --location "https://github.com/timonier/dumb-entrypoint/raw/master/src/s6-overlay/installer" | INSTALL_DIRECTORY="/usr/sbin" sh -s -- install \
 \
     # Install ziahamza/webui-aria2
 \
