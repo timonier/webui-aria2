@@ -7,9 +7,7 @@ Best and hottest interface to interact with aria2
 Run the image `timonier/webui-aria2`:
 
 ```sh
-docker run \
-    --publish 80:80 \
-    timonier/webui-aria2:latest
+docker run --publish 80:80 timonier/webui-aria2:latest
 # Go to "http://localhost/"
 ```
 
@@ -18,7 +16,7 @@ This image can be used with [timonier/aria2](https://github.com/timonier/aria2).
 ```sh
 # Prepare the project
 
-export RPC_SECRET="0fd9094d-76ca-4a76-be82-eaf513a1ccd2"
+export RPC_SECRET=0fd9094d-76ca-4a76-be82-eaf513a1ccd2
 
 # Start the project
 

@@ -4,12 +4,12 @@ angular
     .constant('$titlePattern', 'active: {active} - waiting: {waiting} - stopped: {stopped} — {name}')
     .constant('$pageSize', 11)
     .constant('$authconf', {
-        host: '%RPC_HOST%',
+        host: '{{ default .Env.RPC_HOST "127.0.0.1" }}',
         path: '/jsonrpc',
-        port: '%RPC_PORT%',
+        port: '{{ default .Env.RPC_PORT "6800" }}',
         encrypt: false,
         auth: {
-            token: '%RPC_SECRET%'
+            token: '{{ default .Env.RPC_SECRET "" }}'
         },
         directURL: ''
     })

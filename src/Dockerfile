@@ -3,28 +3,23 @@ FROM timonier/nginx:latest
 LABEL \
     maintainer="Morgan Auchede <morgan.auchede@gmail.com>"
 
-ENV \
-    WEBUI_ARIA2_VERSION=latest
-
-RUN set -ex \
+RUN set -e -u -x \
 \
     # Install packages
 \
-    && apk add --no-cache --no-progress --virtual BUILD_DEPS \
-           git \
+    && apk add --no-cache --no-progress --virtual BUILD_DEPS curl \
 \
-    # Install ziahamza/webui-aria2
+    # Install webui-aria2
 \
-    && git clone https://github.com/ziahamza/webui-aria2 /opt/webui-aria2 \
+    && curl --location "https://github.com/ziahamza/webui-aria2/archive/master.tar.gz" | tar --directory /tmp --extract --gzip \
+    && mkdir -p /opt \
+    && mv /tmp/webui-aria2-master /opt/webui-aria2 \
 \
     # Clean
 \
-    && apk del --no-progress \
-           BUILD_DEPS \
-    && rm -f -r \
-           /opt/webui-aria2/.git \
-           /tmp/*
+    && apk del --no-progress BUILD_DEPS \
+    && rm -f -r /tmp/*
 
-COPY ./rootfs /
+COPY rootfs/. /
 
-ENTRYPOINT [ "/init" ]
+VOLUME [ "/opt/webui-aria2" ]

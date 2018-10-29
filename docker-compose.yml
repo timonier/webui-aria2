@@ -1,4 +1,4 @@
-version: '2.3'
+version: '3.7'
 
 services:
 
@@ -27,15 +27,13 @@ services:
 
     webui-aria2:
         build:
-            context: ./src
+            context: src/.
             dockerfile: Dockerfile
         environment:
             - 'RPC_HOST=127.0.0.1'
             - 'RPC_PORT=6800'
             - 'RPC_SECRET=${RPC_SECRET}'
         image: timonier/webui-aria2:latest
-        ports:
-            - '80:80'
 
 volumes:
 
