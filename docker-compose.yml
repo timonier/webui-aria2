@@ -3,18 +3,7 @@ version: '3.7'
 services:
 
     aria2:
-        command:
-            - 'aria2c'
-            - '--dir=/var/lib/seedbox'
-            - '--enable-dht=false'
-            - '--enable-rpc'
-            - '--log=-'
-            - '--log-level=notice'
-            - '--max-concurrent-downloads=10'
-            - '--quiet'
-            - '--rpc-listen-all=true'
-            - '--rpc-save-upload-metadata=false'
-            - '--rpc-secret=${RPC_SECRET}'
+        command: 'aria2c --dir=/var/lib/seedbox --enable-dht=false --enable-rpc --log=- --log-level=notice --max-concurrent-downloads=10 --quiet --rpc-listen-all=true --rpc-save-upload-metadata=false --rpc-secret=${RPC_SECRET}'
         environment:
             - 'USER=nobody'
         image: timonier/aria2:latest
@@ -29,11 +18,13 @@ services:
         build:
             context: src/.
             dockerfile: Dockerfile
-        environment:
-            - 'RPC_HOST=127.0.0.1'
-            - 'RPC_PORT=6800'
-            - 'RPC_SECRET=${RPC_SECRET}'
         image: timonier/webui-aria2:latest
+        read_only: true
+        tmpfs:
+            - '/run:exec'
+            - '/var/cache/nginx'
+        volumes:
+            - '/etc/nginx'
 
 volumes:
 

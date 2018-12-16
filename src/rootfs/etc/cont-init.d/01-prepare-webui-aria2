@@ -1,4 +1,0 @@
-#!/bin/sh
-set -e -u
-
-dockerize -template /opt/webui-aria2/configuration.js:/opt/webui-aria2/configuration.js

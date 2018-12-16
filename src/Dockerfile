@@ -21,5 +21,3 @@ RUN set -e -u -x \
     && rm -f -r /tmp/*
 
 COPY rootfs/. /
-
-VOLUME [ "/opt/webui-aria2" ]
