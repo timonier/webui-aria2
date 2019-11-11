@@ -1,0 +1,61 @@
+cache: &default-cache
+    key: '${CI_COMMIT_REF_SLUG}'
+    paths:
+        - generated/
+
+stages:
+    - build
+    - deploy
+
+# ---
+
+build:rootfs:
+    before_script:
+        - 'apk add --no-cache --no-progress bash'
+    cache:
+        <<: *default-cache
+        policy: push
+    image:
+        entrypoint: ['']
+        name: alpine:latest
+    only:
+        - master
+    script:
+        - 'bin/build-rootfs'
+    stage: build
+
+deploy:image:
+    before_script:
+        - 'apk add --no-cache --no-progress ca-certificates curl'
+    image:
+        entrypoint: ['']
+        name: alpine:latest
+    only:
+        - master
+    script:
+        - 'curl --request POST "https://cloud.docker.com/api/build/v1/source/7e387744-8d9e-4c05-b144-4d89f6a01ec0/trigger/${DOCKER_CLOUD_TOKEN}/call/"'
+    stage: deploy
+
+deploy:rootfs:
+    before_script:
+        - 'apk add --no-cache --no-progress ca-certificates git'
+        - 'git config --global user.email "${GIT_USER_EMAIL}"'
+        - 'git config --global user.name "${GIT_USER_NAME}"'
+        - 'git remote set-url origin "https://${GITLAB_USER}:${GITLAB_TOKEN}@gitlab.com/${CI_PROJECT_PATH}.git"'
+    cache:
+        <<: *default-cache
+        policy: pull
+    image:
+        entrypoint: ['']
+        name: alpine:latest
+    only:
+        - master
+    script:
+        - 'rm -f -r $(ls | grep -v generated)'
+        - 'mv generated/* ./'
+        - 'rm -f -r .gitignore .gitlab-ci.yml .php_cs.dist generated'
+        - 'git checkout --orphan generated'
+        - 'git add -A'
+        - 'git commit -m "$(date --utc ''+%Y-%m-%d %H:%M'')"'
+        - 'git push origin generated --force'
+    stage: deploy
