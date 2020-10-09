@@ -1,3 +1,1 @@
 /docker-compose.*.yml
-/generated/*
-!generated/.gitkeep

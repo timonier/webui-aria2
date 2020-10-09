@@ -1,0 +1,31 @@
+name: 'CI / CD'
+
+on:
+    pull_request:
+    push:
+    schedule:
+        - cron:  '0 1 * * *'
+
+jobs:
+
+    default:
+        env:
+            GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
+        runs-on: 'ubuntu-latest'
+        steps:
+            - uses: 'actions/checkout@v1'
+            - name: '[CI] Build Docker image'
+              run: |
+                  set -e -u -x
+                  docker build --tag timonier/webui-aria2:"${GITHUB_SHA}" src
+            - name: '[CD] Build Docker image'
+              if: 'github.event_name == ''push'' && github.ref == ''refs/heads/master'' && github.repository == ''timonier/webui-aria2'''
+              run: |
+                  set -e -u -x
+                  docker build --tag timonier/webui-aria2:latest src
+            - name: '[CD] Push Docker image'
+              if: 'github.event_name == ''push'' && github.ref == ''refs/heads/master'' && github.repository == ''timonier/webui-aria2'''
+              run: |
+                  set -e -u -x
+                  echo '${{ secrets.DOCKER_HUB_PASSWORD }}' | docker login --username '${{ secrets.DOCKER_HUB_USERNAME }}' --password-stdin
+                  docker push timonier/webui-aria2:latest
