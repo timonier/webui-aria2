@@ -25,6 +25,8 @@ services:
             - '/var/cache/nginx'
         volumes:
             - '/etc/nginx'
+        ports:
+            - '80:80'
 
 volumes:
 
